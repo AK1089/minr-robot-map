@@ -1,0 +1,39 @@
+# ENTITY | right-click foreman in quarry
+@cooldown 502
+
+@using akrobots
+@delay 3
+@var player.closeInventory()
+
+@if !levelComplete[0]
+    @player &7[&cForeman&7] &7Heya there! Thanks for dropping on by - I'm excited to see what Claude can do for us here at the quarry.
+    @delay 60
+    @player &7[&cForeman&7] &7D'ya think Claude could get the coal from down there into that there chest minecart?
+    @delay 60
+    @player &7[&cForeman&7] &7The mine's not too far down, but it's a 5-second drop in a tight spot. I would rather the little guy does it than one of my men is all.
+    @delay 80
+    @player &7[&cForeman&7] &7Should be a straightforward job: get him to go down the chute, climb up those stairs, get the coal, and throw it into the lil' hopper down there.
+    @delay 80
+    @player &7[&cForeman&7] &7Ya think you could get that done? Just come back and say hello when you're done.
+    @delay 60
+    @player &7[&cInfo&7] &eWrite a program for Claude to descend the mineshaft, navigate to the pressure plate to obtain some coal, and deposit the coal in the hopper.
+    @return
+@fi
+
+@if !levelComplete[1]
+    @player &7[&cForeman&7] &7Why, that's a mighty fine job you've done there! My men'll be so happy that they don't gotta go down there no more.
+    @delay 60
+    @player &7[&cForeman&7] &7Say, this little guy's pretty smart, right? We try to send down torches to the caves a dozen at a time. Reckon he could do that for me?
+    @delay 60
+    @player &7[&cForeman&7] &7Over on the west side, there's a torch dispenser. It's hidden just behind a wall - you might have to break some stone to get to it. 
+    @delay 80
+    @player &7[&cForeman&7] &7Can ya fetch a dozen torches and load 'em up into the cart, then send it down to the caves when they're all in there?
+    @delay 80
+    @player &7[&cInfo&7] &eWrite a program for Claude to get to the torch dispenser, load 12 torches into the hopper minecart, then press the button to send it down to the caves.
+    @return
+@fi
+
+@if !levelComplete[2]
+    @player &7[&cForeman&7] &7i love you kiss me please
+    @return
+@fi

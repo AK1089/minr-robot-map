@@ -1,0 +1,4 @@
+# ENTITY | on the display model Claude
+
+@console /func execute entity_ai::EntityAI(Entity("{{entity.getUniqueId()}}"), Player("{{player.getUniqueId()}}")).watch(4)
+@player &7[&cClaude&7] &eBeep beep! I'm &dClaude&e, the latest-generation model of an intelligent kinetic system built by &oAK Robotics Incorporated&e!

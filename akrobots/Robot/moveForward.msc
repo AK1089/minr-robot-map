@@ -1,0 +1,43 @@
+# METHOD | Robot.moveForward(Int steps)
+@fast
+@using akrobots
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7MOVE_FORWARD (steps={{steps}})
+
+# direction the armor stand is facing
+@define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.entity.getUniqueId()}} Rotation[0]") + 720) % 360
+
+# how much to move in the x/z directions
+@define Int delta_x = 0
+@define Int delta_z = 0
+
+# depends on which way it's facing!
+@if facing_direction == 0
+    @var delta_z = 1
+@elseif facing_direction == 90
+    @var delta_x = -1
+@elseif facing_direction == 180
+    @var delta_z = -1
+@elseif facing_direction == 270
+    @var delta_x = 1
+@fi
+
+# move it this many steps (but not if there's something in the way!)
+@for Int i in list::range(0, steps)
+    @if enterableBlocks.contains(Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase())
+        @bypass /execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run teleport @s ~{{delta_x}} ~ ~{{delta_z}}
+        @var this.playsound("block.stone.step")
+    @fi
+    @var this.pickUpItems()
+
+    @if !currentlyRunning[this.id]
+        @return
+    @fi
+
+    @if !Region("claude_level_{{this.id}}", "Theta").containsLocation(this.entity.getLocation().asBlockLocation())
+        @return
+    @fi
+
+    
+    @delay 5
+@done

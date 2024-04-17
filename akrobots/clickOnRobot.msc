@@ -1,0 +1,71 @@
+# FUNCTION | clickOnRobot(Player player, Entity entity, Int index)
+@global_cooldown 10
+@using akrobots
+
+# editing the armour stand to move it around shouldn't do anything
+@if String["flint", "barrier"].contains(player.getItemInMainHand().getItemType().toLowerCase())
+    @player &7[&cInfo&7] &eManually overriding for edit mode.
+    @var currentlyRunning[index] = false
+    @return
+@fi
+
+# already finished this level
+@if levelComplete[index]
+    @player &7[&cInfo&7] &eYou have already completed this level!
+    @return
+@fi
+
+# no multiple concurrent runs!
+@if currentlyRunning[index]
+    @player &7[&cInfo&7] &eClaude is currently executing a script! Please wait for him to finish.
+    @return
+@fi
+
+# gets the book, which should be in the player's main hand
+@define Item book = player.getItemInMainHand()
+
+# if the player isn't holding the book
+@if book == null || book.getItemType().toLowerCase() != "writable_book"
+    @player &7[&cInfo&7] &ePlease hold a writable book containing your script for Claude. Do not sign the book!
+    @return
+@fi
+
+# player has now submitted a book
+@player &bCompiling robot script...
+
+# parse the script from the writable book
+@define Script script = parseScript(player, book)
+@var script.robot = Robot(entity, index)
+@var script.robot.reset()
+
+@var currentlyRunning[index] = true
+
+# get the main routine
+@if !script.execute("main", 0)
+    @var script.robot.reset()
+    @return
+@fi
+
+
+@player &7[&cInfo&7] &eVerifying completion...
+@delay 10
+@var levelComplete[index] = checkSolution(player, entity, index)
+
+# check if the level is complete
+@if levelComplete[index]
+    @player &7[&cInfo&7] &aLevel {{index + 1}} complete - well done!
+    @delay 40
+    @player &7[&cInfo&7] &eGo talk to the &dForeman &eagain for the next set of instructions.
+@else
+    @player &7[&cInfo&7] &cLevel failed. Resetting... 
+@fi
+
+# reset the robot when done
+@var script.robot.reset()
+
+
+
+
+
+# 
+  

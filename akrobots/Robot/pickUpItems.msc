@@ -1,0 +1,30 @@
+# METHOD | Robot.pickUpItems()
+@fast
+@using akrobots
+@define Player player = Player("AK1089")
+
+@define Int x = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[0]")
+@define Int y = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[1]")
+@define Int z = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[2]")
+
+@if x == 0
+    @return
+@fi
+
+@define Entity item = Entity(getItemUUID(x, y, z))
+@if util::executeAndQueryResult("/data get entity {{item.getUniqueId()}} Age") < 11
+    @return
+@fi
+
+@if util::executeAndQueryResult("/data get entity {{item.getUniqueId()}} PickupDelay") > 1
+    @return
+@fi
+
+@define String blockType = (item + "").replace(" ", "_").toLowerCase()
+@player {{blockType}}
+
+@bypass /minecraft:kill {{item.getUniqueId()}}
+@var this.playsound("entity.item.pickup")
+
+@var this.inventory.append(blockType)
+@player {{this.inventory}}

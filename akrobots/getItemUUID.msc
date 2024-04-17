@@ -1,0 +1,85 @@
+# FUNCTION | getItemUUID(Int x, Int y, Int z) -> String
+
+# alphanumeric characters used in hexadecimal
+@define String[] hex_chars = String["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+
+# will store all UUIDs found in the region
+@define String[] all_uuids = String[]
+
+# pow will store the value of 16 to some power, ie. some basic higher digit value in hexadecimal
+@define Long pow = 0L
+
+# stores the UUID being worked with - must be a Long due to Int limits
+@define Long uuid_current = 0L
+
+# caches the value of a calculation later on to save computation time
+@define Int next_digit_index = 0
+
+# if there's no entity at a given location, this being false flags that up
+@define Boolean valid_uuid = false
+
+# the actual String UUID, and its characters in String[] form
+@define String[] u = String[]
+@define String uuidstring = ""
+
+# makes sure entities are of a specific type
+@define String typestring = ""
+
+# if you specified a type
+@var typestring = "type=minecraft:item,"
+
+# resets variables which need to be reset
+@var u = String[]
+@var valid_uuid = false
+
+# UUIDs are stored as four decimal integers - this gets all of them one-by-one
+@for Int i in list::range(0, 4)
+    
+    # minecraft command to get UUID - must be stored as a Long for further processing
+    @var uuid_current = Long(util::executeAndQueryResult("/execute in minecraft:theta run data get entity @e[{{typestring}}x={{x}},y={{y}},z={{z}},dx=1,dy=1,dz=1,limit=1] UUID[{{i}}]"))
+    
+    # if a non-zero value is returned, there is an entity, so continue
+    @if uuid_current != 0
+        @var valid_uuid = true
+        
+        # if its negative due to integer overflows, this processes it for that not to be the case. 4294967296 is the unsigned 32-bit integer limit, equal to 2^32.
+        @if uuid_current < 0
+            @var uuid_current = Long(4294967296L + uuid_current)
+        @fi
+        
+        # converts decimal to hexadecimal using backwards-iterating powers of 16
+        @for Int pow_inverse in list::range(0, 8)
+            @var pow = Long(16 ^ (7 - pow_inverse))
+            
+            # caches the value of the digit, which is equal to the number of complete times the basic place value fits (/ is integer division)
+            @var next_digit_index = Int(uuid_current / pow)
+            
+            # adds the correct hex character to the list u
+            @var u.append(hex_chars[next_digit_index])
+            
+            # reduces the uuid by stripping off the first hex digit (of course, as it's in decimal this is slightly more complicated)
+            @var uuid_current = Long(uuid_current - Long(next_digit_index * pow))
+            
+        @done
+        
+    @fi
+    
+@done
+
+# if there is an entity, to process
+@if valid_uuid
+    
+    # vanilla UUIDs have dashes in them splitting the 32-char UUID into blocks of 8-4-4-4-12, for some reason
+    @var uuidstring = u[0] + u[1] + u[2] + u[3] + u[4] + u[5] + u[6] + u[7] + "-" + u[8] + u[9] + u[10] + u[11] + "-" + u[12] + u[13] + u[14] + u[15] + "-" + u[16] + u[17] + u[18] + u[19] + "-" + u[20] + u[21] + u[22] + u[23] + u[24] + u[25] + u[26] + u[27] + u[28] + u[29] + u[30] + u[31]
+    
+    # if this UUID isn't already in the master list, add it in!
+    @if ! all_uuids.contains(uuidstring)
+        @var all_uuids.append(uuidstring)
+    @fi
+    
+@fi
+
+@if all_uuids.length() >= 1
+    @return all_uuids[0]
+@fi
+@return ""

@@ -1,0 +1,43 @@
+# METHOD | Robot.jump()
+@fast
+@using akrobots
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7JUMP
+
+# direction the armor stand is facing
+@define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.entity.getUniqueId()}} Rotation[0]") + 720) % 360
+
+# how much to move in the x/z directions
+@define Int delta_x = 0
+@define Int delta_z = 0
+
+# depends on which way it's facing!
+@if facing_direction == 0
+    @var delta_z = 1
+@elseif facing_direction == 90
+    @var delta_x = -1
+@elseif facing_direction == 180
+    @var delta_z = -1
+@elseif facing_direction == 270
+    @var delta_x = 1
+@fi
+
+# if it can't go up into the space it's planning to go, we can't jump
+@if !enterableBlocks.contains(Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 1, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase())
+    @delay 5
+    @return
+
+# if there's nothing to stand on, then we can't jump either
+@elseif enterableBlocks.contains(Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase())
+    @delay 5
+    @return
+@fi
+
+# teleport 
+@bypass /execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run teleport @s ~{{delta_x}} ~1 ~{{delta_z}}
+@var this.playsound("block.stone.fall")
+
+@var this.pickUpItems()
+@delay 5
+
+

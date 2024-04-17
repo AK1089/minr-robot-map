@@ -1,0 +1,8 @@
+# METHOD | Robot.reset()
+
+@var currentlyRunning[this.id] = false
+@delay 20
+@var this.entity.teleport(this.startPosition)
+@bypass /minr restore claude_level_{{this.id}} Theta
+@bypass /data modify entity @e[tag=claude_level_{{this.id}}_check,limit=1] Items set value []
+@bypass /data modify entity {{this.entity.getUniqueId()}} HandItems[0].id set value "diamond_pickaxe"

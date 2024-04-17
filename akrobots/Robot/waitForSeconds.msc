@@ -1,0 +1,11 @@
+# METHOD | Robot.waitForSeconds(Int seconds)
+@fast
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7WAIT (steps={{seconds}})
+
+@for Int i in list::range(0, seconds)
+    @for Int j in list::range(0, 4)
+        @var this.pickUpItems()
+        @delay 5
+    @done
+@done

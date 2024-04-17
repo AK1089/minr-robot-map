@@ -1,0 +1,39 @@
+# METHOD | Robot.placeBlock()
+@fast
+@using akrobots
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7PLACE_BLOCK
+
+# direction the armor stand is facing
+@define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.entity.getUniqueId()}} Rotation[0]") + 720) % 360
+
+# how much to move in the x/z directions
+@define Int delta_x = 0
+@define Int delta_z = 0
+
+# depends on which way it's facing!
+@if facing_direction == 0
+    @var delta_z = 1
+@elseif facing_direction == 90
+    @var delta_x = -1
+@elseif facing_direction == 180
+    @var delta_z = -1
+@elseif facing_direction == 270
+    @var delta_x = 1
+@fi
+
+@define Block blockSlot = Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation())
+
+# move it this many steps (but not if there's something in the way!)
+@if blockSlot.getBlockType().toLowerCase() == "air"
+    @bypass /setblock {{blockSlot + ""}} {{this.inventory[this.currentlyHeldItem]}}
+@fi
+
+@var blockSlot = Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation())
+@if blockSlot.getBlockType().toLowerCase() != "air"
+    @var this.playsound("block.stone.place")
+    @var this.inventory.remove(this.currentlyHeldItem)
+    @var this.currentlyHeldItem = 0
+    @bypass /data modify entity {{this.entity.getUniqueId()}} HandItems[0].id set value "diamond_pickaxe"
+    @delay 5
+@fi

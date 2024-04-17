@@ -1,0 +1,14 @@
+# METHOD | Robot.switchItem(String itemName)
+@fast
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7SWITCH_ITEM (steps={{itemName}})
+
+@if !this.inventory.contains(itemName)
+    @return
+@fi
+
+@var this.currentlyHeldItem = this.inventory.find(itemName)
+@bypass /data modify entity {{this.entity.getUniqueId()}} HandItems[0].id set value "{{itemName}}"
+@var this.playsound("ui.button.click")
+
+@delay 5

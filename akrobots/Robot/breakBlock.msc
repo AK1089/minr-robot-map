@@ -1,0 +1,35 @@
+# METHOD | Robot.breakBlock()
+@fast
+@using akrobots
+@define Player player = Player("AK1089")
+@player &7 ------ &eExecuting action: &7BREAK_BLOCK
+
+# direction the armor stand is facing
+@define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.entity.getUniqueId()}} Rotation[0]") + 720) % 360
+
+# how much to move in the x/z directions
+@define Int delta_x = 0
+@define Int delta_z = 0
+
+# depends on which way it's facing!
+@if facing_direction == 0
+    @var delta_z = 1
+@elseif facing_direction == 90
+    @var delta_x = -1
+@elseif facing_direction == 180
+    @var delta_z = -1
+@elseif facing_direction == 270
+    @var delta_x = 1
+@fi
+
+@define Block blockSlot = Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation())
+
+# if can't break this
+@if !breakableBlocks.contains(blockSlot.getBlockType().toLowerCase())
+    @delay 5
+    @return
+@fi
+
+@var this.playsound("block.stone.break")
+@bypass /setblock {{blockSlot + ""}} air destroy
+@delay 5

@@ -1,0 +1,7 @@
+# FUNCTION | onRegionEnter(Player player, Int index)
+
+@using akrobots
+@if !levelComplete[index - 1]
+    @player &7[&cInfo&7] &eYou have not yet completed the previous level!
+    @bypass /teleport {{player}} {{teleportCoords[index]}}
+@fi

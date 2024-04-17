@@ -1,0 +1,5 @@
+# CONSTRUCTOR | Script(Player player, Routine[] routines)
+@using akrobots
+
+@var this.player = player
+@var this.routines = routines

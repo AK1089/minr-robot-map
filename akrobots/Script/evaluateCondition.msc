@@ -1,0 +1,39 @@
+# METHOD | Script.evaluateCondition(String condition) -> Boolean
+@using akrobots
+@define String[] parts = condition.split(" ")
+@define String conditionType = parts[0].trim()
+@define String predicate = parts[1].trim()
+
+@if conditionType == "Facing"
+
+    # direction the armor stand is facing
+    @define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.robot.entity.getUniqueId()}} Rotation[0]") + 720) % 360
+
+    # how much to move in the x/z directions
+    @define Int delta_x = 0
+    @define Int delta_z = 0
+
+    # depends on which way it's facing!
+    @if facing_direction == 0
+        @var delta_z = 1
+    @elseif facing_direction == 90
+        @var delta_x = -1
+    @elseif facing_direction == 180
+        @var delta_z = -1
+    @elseif facing_direction == 270
+        @var delta_x = 1
+    @fi
+
+    # move it this many steps (but not if there's something in the way!)
+    @return (predicate == (Block((this.robot.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase()))
+
+@elseif conditionType == "Holding"
+    
+    # check if the item in the robot's main hand matches the specified predicate
+    @return this.robot.inventory[this.robot.currentlyHeldItem] == predicate
+
+@else
+    # unknown condition type
+    @player &cError&7: Expected &fFacing &7or &fHolding&7, not &f{{conditionType}}
+    @return false
+@fi

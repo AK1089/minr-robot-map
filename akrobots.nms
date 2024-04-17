@@ -1,0 +1,59 @@
+@namespace akrobots
+    @class Routine
+        Routine(String name, String[] lines)
+        String name
+        String[] lines
+    @endclass
+
+    @class Script
+        Script(Player player, akrobots::Routine[] routines)
+        akrobots::Routine getRoutine(String name)
+        Player player
+        akrobots::Robot robot
+        akrobots::Routine[] routines
+        Boolean execute(String routineName, Int startIndex)
+        Boolean evaluateCondition(String condition)
+    @endclass
+
+    @class Robot
+        Robot(Entity entity, Int id)
+        Entity entity
+        String[] inventory
+        Int currentlyHeldItem
+        Int id
+        Position startPosition
+
+        reset()
+        dropItem()
+        pickUpItems()
+        moveForward(Int steps)
+        turnLeft()
+        turnRight()
+        jump()
+        waitForSeconds(Int seconds)
+        placeBlock()
+        breakBlock()
+        activateBlock()
+        switchItem(String itemName)
+        playsound(String sound)
+    @endclass
+
+    String[] getBookPages(Item book)
+    akrobots::Script parseScript(Player player, Item book)
+    Int findLine(String[] lines, String toFind, Int start)
+    String getItemUUID(Int x, Int y, Int z)
+    giveBook(Player player)
+    clickOnRobot(Player player, Entity entity, Int index)
+    Boolean checkSolution(Player player, Entity entity, Int index)
+    Void onRegionEnter(Player player, Int index)
+
+    String[] enterableBlocks = String["air", "polished_blackstone_pressure_plate", "light_weighted_pressure_plate", "dark_oak_button", "redstone_wire", "polished_blackstone_button", "stone_pressure_plate"]
+    String[] breakableBlocks = String["white_concrete", "stone", "raw_iron_block", "dirt"]
+
+    relative Boolean[] levelComplete = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    Boolean[] currentlyRunning = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+
+    # String[] robotUUIDs = String["d813eb31-e252-4acc-b97c-10c34de6a7e0"]
+    String[] teleportCoords = String["-12645.5 117.0 -12534.0 180 -30", "-12652.5 115.00 -12526.5", "-12642.5 115.00 -12525.5 -90 0"]
+
+@endnamespace

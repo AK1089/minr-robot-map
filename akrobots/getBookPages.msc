@@ -1,0 +1,24 @@
+# FUNCTION | getBookPages(Item book) -> String[]
+@using akrobots
+@define String bookString = book.string()
+
+# extract the pages from the book string
+@define Int startIndex = bookString.indexOf("pages=[") + 7
+@define String pagesString = bookString.substring(startIndex, bookString.length() - 3)
+
+# split the pages string by ", " to get individual pages
+@define String[] rawPages = pagesString.split(", ")
+
+# process each raw page to remove leading "# file <filename>" and trailing "\\n"
+@define String[] pages = String[]
+@for Int i in list::range(0, rawPages.length())
+    @define String rawPage = rawPages[i]
+    @define Int newlineIndex = rawPage.indexOf("\\n")
+    @if newlineIndex != -1
+        @var pages[i] = rawPage.substring(newlineIndex + 2, rawPage.length() - 2)
+    @else
+        @var pages[i] = rawPage
+    @fi
+@done
+
+@return pages

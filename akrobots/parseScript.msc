@@ -1,0 +1,59 @@
+# FUNCTION | parseScript(Player player, Item book) -> Script
+@using akrobots
+@define Script script = Script(player, Routine[])
+
+# the routine that we're adding, and what lines are it
+@define String currentRoutineName = "main"
+@define String[] currentRoutineLines = String[]
+
+# for each page, for each line within the page
+@for String page in getBookPages(book)
+    @for String line in page.split("\n")
+
+        # if the line denotes the start of a new file, start a new routine
+        @if line.startsWith("# ")
+
+            # add the previous routine to the list if it is non-empty
+            @if currentRoutineLines.length() > 0
+
+                # add routine to list
+                @var script.routines.append(Routine(currentRoutineName, currentRoutineLines))
+
+                # output that the function is compiled and each line in it
+                @player &7 -- &dCompiling function {{currentRoutineName}}.robot
+                @for String line_ in currentRoutineLines
+                    @player &7 ---- &eAdding line &f{{line_}}
+                @done
+
+                # reset the list of lines
+                @var currentRoutineLines = String[]
+            @fi
+
+            # gets the name from the line (# name.robot)
+            @var currentRoutineName = line.trim().substring(2, line.trim().length() - 6)
+
+        # if it's a normal script-line that's non-empty and has a number, add it to the list that we're going for
+        @elseif line.trim().length() > 0
+            @if line.trim().contains(" ")
+                @var currentRoutineLines.append(line.trim().substring(line.trim().indexOf(" "), line.trim().length()).trim())
+            @else
+                @var currentRoutineLines.append(line.trim())
+            @fi
+        @fi
+    @done
+@done
+
+# add the last routine to the list if it's non-empty
+@if currentRoutineLines.length() > 0
+    @var script.routines.append(Routine(currentRoutineName, currentRoutineLines))
+    @player &7 -- &dCompiling function {{currentRoutineName}}.robot
+    @for String line_ in currentRoutineLines
+        @player &7 ---- &eAdding line &f{{line_}}
+    @done
+@fi
+
+# final output
+@player &aSuccessfully compiled scripts; now executing.
+@player
+
+@return script

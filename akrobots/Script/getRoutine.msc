@@ -1,0 +1,10 @@
+# METHOD | Script.getRoutine(String name) -> Routine
+@using akrobots
+
+@for Routine routine in this.routines
+    @if routine.name == name
+        @return routine
+    @fi
+@done
+
+@return Routine("main", String[])

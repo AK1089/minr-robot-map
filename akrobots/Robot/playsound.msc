@@ -1,0 +1,2 @@
+# FUNCTION | playsound(String sound)
+@bypass /execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run playsound minecraft:{{sound}} block @a[distance=..50] ~ ~ ~
