@@ -1,1 +1,7 @@
-# FUNCTION | activateBlock(Block block)
+# FUNCTION | activateBlock(String coords)
+
+# interaction_type is as follows:
+# 0 - flip a lever at this location
+# 1 - press a button at this location
+# 2 - trapdoor flip
+

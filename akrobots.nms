@@ -46,7 +46,7 @@
     clickOnRobot(Player player, Entity entity, Int index)
     Boolean checkSolution(Player player, Entity entity, Int index)
     Void onRegionEnter(Player player, Int index)
-    Void activateBlock(Block block)
+    Void activateBlock(String coords)
 
     String[] enterableBlocks = String["air", "polished_blackstone_pressure_plate", "light_weighted_pressure_plate", "dark_oak_button", "redstone_wire", "polished_blackstone_button", "stone_pressure_plate"]
     String[] breakableBlocks = String["white_concrete", "stone", "raw_iron_block", "dirt"]

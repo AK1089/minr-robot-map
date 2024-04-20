@@ -2,5 +2,5 @@
 @define Player player = Player("AK1089")
 @player &7 ------ &eExecuting action: &7ACTIVATE_BLOCK
 
-@console /func execute akrobots::activateBlock(Block({{block.getX()}}, {{block.getY()}}, {{block.getZ()}}, "Theta"))
+@console /func execute akrobots::activateBlock(Block("{{block.getX()}} {{block.getY()}} {{block.getZ()}}"))
 @delay 5
