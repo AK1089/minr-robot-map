@@ -22,6 +22,13 @@
     @var delta_x = 1
 @fi
 
+# accounts for moving backwards
+@if steps < 0
+    @var steps = -steps
+    @var delta_x = -delta_x
+    @var delta_z = -delta_z
+@fi
+
 # move it this many steps (but not if there's something in the way!)
 @for Int i in list::range(0, steps)
     @if enterableBlocks.contains(Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase())
@@ -34,10 +41,10 @@
         @return
     @fi
 
+    # if we've exited the region
     @if !Region("claude_level_{{this.id}}", "Theta").containsLocation(this.entity.getLocation().asBlockLocation())
         @return
     @fi
-
     
     @delay 5
 @done

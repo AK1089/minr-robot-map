@@ -63,7 +63,7 @@
         @fi
 
         # can't go forward more than 32x
-        @if Int(parts[1].trim()) > 32
+        @if (Int(parts[1].trim()) > 32) || (Int(parts[1].trim()) < -32)
             @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Maximum distance of 32 exceeded (specified {{Int(parts[1].trim())}}).
             @return false
         @fi
