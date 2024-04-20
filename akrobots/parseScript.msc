@@ -9,6 +9,7 @@
 # for each page, for each line within the page
 @for String page in getBookPages(book)
     @for String line in page.split("\n")
+        @var line = line.toLowerCase()
 
         # if the line denotes the start of a new file, start a new routine
         @if line.startsWith("# ")

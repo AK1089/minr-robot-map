@@ -29,7 +29,7 @@
     @var line = routine.lines[i]
     @var parts = line.replace(" ", "").replace(")", "").trim().split("\(")
     @var parts.append("")
-    @var command = parts[0]
+    @var command = parts[0].toLowerCase()
 
     @player &7 ---- &eExecuting line &f{{line}} &7(command = &f{{command}}&7)
     
@@ -49,7 +49,7 @@
     @fi
 
     # moves the robot forward by the specified number of steps
-    @if command == "Forward"
+    @if command == "forward"
 
         # default argument of 1
         @if parts[1].trim().length() == 0
@@ -71,16 +71,16 @@
         @var this.robot.moveForward(Int(parts[1].trim()))
 
     # turns 90º left
-    @elseif command == "TurnLeft"
+    @elseif command == "turnleft"
         @var this.robot.turnLeft()
 
     # turns 90º right
-    @elseif command == "TurnRight"
+    @elseif command == "turnright"
         # Turn the robot 90 degrees to the right
         @var this.robot.turnRight()
 
     # waits for the specified duration
-    @elseif command == "Wait"
+    @elseif command == "wait"
 
         # default argument of 1
         @if parts[1].trim().length() == 0
@@ -104,34 +104,34 @@
         @var this.robot.waitForSeconds(Int(parts[1].trim()))
 
     # waits for the specified duration
-    @elseif command == "Jump"
+    @elseif command == "jump"
         @var this.robot.jump()
 
     # waits for the specified duration
-    @elseif command == "Drop"
+    @elseif command == "drop"
         @var this.robot.dropItem()
 
     # places a block ahead of the robot
-    @elseif command == "Place"
+    @elseif command == "place"
         @var this.robot.placeBlock()
 
     # breaks the block ahead of the robot
-    @elseif command == "Break"
+    @elseif command == "break"
         @var this.robot.breakBlock()
 
     # activates the block (eg., lever or button) ahead of the robot
-    @elseif command == "Activate"
+    @elseif command == "activate"
         @var this.robot.activateBlock()
 
     # switch to the specified item in the robot's inventory
-    @elseif command == "SwitchItem"
+    @elseif command == "switchitem"
         @var this.robot.switchItem(parts[1].trim().replace("\"", ""))
 
     # implements branching logic
-    @elseif command == "If"
+    @elseif command == "if"
 
         # Find the corresponding EndIf line
-        @var afterBranchIndex = findLine(routine.lines, "EndIf()", i+1)
+        @var afterBranchIndex = findLine(routine.lines, "endif()", i+1)
         @if afterBranchIndex == -1
             @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Missing EndIf for If statement.
             @return false
@@ -148,7 +148,7 @@
         @return this.execute(routineName, afterBranchIndex + 1)
 
     # implements looping logic
-    @elseif command == "Repeat"
+    @elseif command == "repeat"
 
         # default argument of 1
         @if parts[1].trim().length() == 0
@@ -168,7 +168,7 @@
         @fi
 
         # find the corresponding EndRepeat line
-        @var afterBranchIndex = findLine(routine.lines, "EndRepeat()", i+1)
+        @var afterBranchIndex = findLine(routine.lines, "endrepeat()", i+1)
         @if afterBranchIndex == -1
             @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Missing EndRepeat for Repeat statement.
             @return false
@@ -185,15 +185,15 @@
         @return this.execute(routineName, afterBranchIndex + 1)
 
     # we only hit these lines when we successfully complete a block
-    @elseif command == "EndIf" || command == "EndRepeat"
+    @elseif command == "endif" || command == "endrepeat"
         @return true
 
     # implements function call logic
-    @elseif command == "Subroutine"
+    @elseif command == "subroutine"
         @var this.execute(parts[1].trim(), 0)
 
-    # implements function call logic
-    @elseif command == "Exit"
+    # ends the program
+    @elseif command == "exit"
         @return true
 
     @else
