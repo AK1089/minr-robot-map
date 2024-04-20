@@ -10,6 +10,7 @@
 # mapping of buttons, levers etc to restone to mimic its value
 @define String[] keys = String["-12663 116 -12528 minecraft:polished_blackstone_button[face=wall,facing=west,"]
 @define String[] values = String["-12662 115 -12528 minecraft:redstone_torch[lit=true]"]
+@define String[] resets = String["-12662 115 -12528 air"]
 
 # finds the setblock command containing the coordinates we were passed in
 @define Int index = -1
@@ -42,5 +43,5 @@
     @bypass /execute in minecraft:theta run setblock {{values[index]}}
     @delay 20
     @bypass /execute in minecraft:theta run setblock {{keys[index]}}powered=false]
-    @bypass /execute in minecraft:theta run setblock air
+    @bypass /execute in minecraft:theta run setblock {{resets[index]}}
 @fi
