@@ -26,11 +26,11 @@
 
 # the type of interaction
 @define Int interaction_type
-@if "lever" in keys[index]
+@if keys[index].contains("lever")
     @var interaction_type = 0
-@elseif "button" in keys[index]
+@elseif keys[index].contains("button")
     @var interaction_type = 1
-@elseif "trapdoor" in keys[index]
+@elseif keys[index].contains("trapdoor")
     @var interaction_type = 2
 @else
     @return
