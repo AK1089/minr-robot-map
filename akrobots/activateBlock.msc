@@ -5,3 +5,30 @@
 # 1 - press a button at this location
 # 2 - trapdoor flip
 
+@fast
+
+# mapping of buttons, levers etc to restone to mimic its value
+@define String[] keys = String["-12663 116 -12528 minecraft:polished_blackstone_button[face=wall,facing=west,"]
+@define String[] values = String["-12662 115 -12528 minecraft:redstone_torch[lit=true]"]
+
+# finds the setblock command containing the coordinates we were passed in
+@define Int index = -1
+@for Int i in list::range(0, keys.length())
+    @if keys[i].contains(coords)
+        @var index = i
+    @fi
+@done
+
+# if we can't find it, the activation is useless, so quit
+@if index == -1
+    @return
+@fi
+
+# for a button press
+@if this.interaction_type == 1
+    @bypass /execute in minecraft:theta run setblock {{keys[i]}}powered=true]
+    @bypass /execute in minecraft:theta run setblock {{values[i]}}
+    @delay 20
+    @bypass /execute in minecraft:theta run setblock {{keys[i]}}powered=false]
+    @bypass /execute in minecraft:theta run setblock air
+@fi
