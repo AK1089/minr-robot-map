@@ -24,11 +24,23 @@
     @return
 @fi
 
+# the type of interaction
+@define Int interaction_type
+@if "lever" in keys[index]
+    @var interaction_type = 0
+@elseif "button" in keys[index]
+    @var interaction_type = 1
+@elseif "trapdoor" in keys[index]
+    @var interaction_type = 2
+@else
+    @return
+@fi
+
 # for a button press
-@if this.interaction_type == 1
-    @bypass /execute in minecraft:theta run setblock {{keys[i]}}powered=true]
-    @bypass /execute in minecraft:theta run setblock {{values[i]}}
+@if interaction_type == 1
+    @bypass /execute in minecraft:theta run setblock {{keys[index]}}powered=true]
+    @bypass /execute in minecraft:theta run setblock {{values[index]}}
     @delay 20
-    @bypass /execute in minecraft:theta run setblock {{keys[i]}}powered=false]
+    @bypass /execute in minecraft:theta run setblock {{keys[index]}}powered=false]
     @bypass /execute in minecraft:theta run setblock air
 @fi
