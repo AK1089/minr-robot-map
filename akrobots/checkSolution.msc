@@ -1,8 +1,8 @@
 # FUNCTION | checkSolution(Player player, Entity entity, Int index) -> Boolean
 
 @if index == 0
-    @return util::executeAndQueryResult("/execute if data entity @e[tag=claude_level_0_check,limit=1] Items[0]") > 0
+    @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_0_check,limit=1] Items[0].Count") > 0)
 @elseif index == 1
-    @return util::executeAndQueryResult("/execute if data entity @e[tag=claude_level_1_check,limit=1] Items[0]") == 12
+    @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_1_check,x=100,dx=16,limit=1] Items[0].Count") == 12)
 @fi
 

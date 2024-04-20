@@ -48,7 +48,7 @@
 
 
 @player &7[&cInfo&7] &eVerifying completion...
-@delay 10
+@delay 20
 @var levelComplete[index] = checkSolution(player, entity, index)
 
 # check if the level is complete
