@@ -3,6 +3,7 @@
 @if index == 0
     @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_0_check,limit=1] Items[0].Count") > 0)
 @elseif index == 1
+    @delay 20
     @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_1_check,y=100,dy=16,limit=1] Items[0].Count") == 12)
 @fi
 
