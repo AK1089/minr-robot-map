@@ -16,7 +16,7 @@
     @delay 80
     @player &7[&cForeman&7] &7Ya think you could get that done? Just come back and say hello when you're done.
     @delay 60
-    @player &7[&cInfo&7] &eWrite a program for Claude to descend the mineshaft, navigate to the pressure plate to obtain some coal, and deposit the coal in the hopper.
+    @player &7[&cInfo&7] &eWrite a program for Claude to descend the mineshaft, navigate to the pressure plate to obtain some coal, and deposit the coal in the hopper on the north wall of the mineshaft.
     @return
 @fi
 
