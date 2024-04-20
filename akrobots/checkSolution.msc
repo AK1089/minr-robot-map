@@ -4,6 +4,6 @@
     @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_0_check,limit=1] Items[0].Count") > 0)
 @elseif index == 1
     @delay 20
-    @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_1_check,x=-13000,dx=1000,y=100,dy=16,z=-13000,dz=1000,limit=1] Items[0].Count") == 12)
+    @return (util::executeAndQueryResult("/data get entity @e[tag=claude_level_1_check,limit=1] Items[0].Count") == 12) && (util::executeAndQueryResult("/data get entity @e[tag=claude_level_1_check,limit=1] Pos[1]") < 116)
 @fi
 
