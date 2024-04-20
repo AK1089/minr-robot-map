@@ -22,5 +22,5 @@
 
 @define Block block = Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation())
 
-@console /func execute akrobots::activateBlock(Block("{{block.getX()}} {{block.getY()}} {{block.getZ()}}"))
+@console /func execute akrobots::activateBlock("{{block.getX()}} {{block.getY()}} {{block.getZ()}}")
 @delay 5
