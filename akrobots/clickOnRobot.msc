@@ -6,6 +6,7 @@
 @if String["flint", "barrier"].contains(player.getItemInMainHand().getItemType().toLowerCase())
     @player &7[&cInfo&7] &eManually overriding for edit mode.
     @var currentlyRunning[index] = false
+    @var levelComplete[index] = false
     @return
 @fi
 
