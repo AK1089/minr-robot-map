@@ -32,7 +32,7 @@
 # move it this many steps (but not if there's something in the way!)
 @for Int i in list::range(0, steps)
     @if enterableBlocks.contains(Block((this.entity.getLocation().asVector3() + Vector3(delta_x, 0, delta_z)).asLocation("Theta").asBlockLocation()).getBlockType().toLowerCase())
-        @bypass /execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run teleport @s ~{{delta_x}} ~ ~{{delta_z}}
+        @bypass /execute as {{this.entity.getUniqueId()}} at @s run teleport @s ~{{delta_x}} ~ ~{{delta_z}}
         @var this.playsound("block.stone.step")
     @fi
     @var this.pickUpItems()

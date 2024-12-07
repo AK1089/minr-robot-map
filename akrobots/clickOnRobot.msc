@@ -63,10 +63,3 @@
 
 # reset the robot when done
 @var script.robot.reset()
-
-
-
-
-
-# 
-  

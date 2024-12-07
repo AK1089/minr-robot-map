@@ -34,7 +34,7 @@
 @fi
 
 # teleport 
-@bypass /execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run teleport @s ~{{delta_x}} ~1 ~{{delta_z}}
+@bypass /execute as {{this.entity.getUniqueId()}} at @s run teleport @s ~{{delta_x}} ~1 ~{{delta_z}}
 @var this.playsound("block.stone.fall")
 
 @var this.pickUpItems()

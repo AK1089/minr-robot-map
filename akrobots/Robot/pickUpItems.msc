@@ -3,9 +3,9 @@
 @using akrobots
 @define Player player = Player("AK1089")
 
-@define Int x = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[0]")
-@define Int y = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[1]")
-@define Int z = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at {{this.entity.getUniqueId()}} run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[2]")
+@define Int x = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at @s run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[0]")
+@define Int y = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at @s run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[1]")
+@define Int z = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at @s run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[2]")
 
 @if x == 0
     @return
