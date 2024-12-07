@@ -1,0 +1,46 @@
+# DS_Store
+.DS_Store
+**/.DS_Store
+
+# Python unimportant files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor files
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Backup files
+*~
+*.bak
+*.swp
+*.swo
+
+# Build and distribution files
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Virtual environment files
+venv/
+env/
+.env/
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Miscellaneous
+.cache/
+.pytest_cache/
+.coverage
+.coverage.*
+.tox/
+.nox/
+.mypy_cache/
