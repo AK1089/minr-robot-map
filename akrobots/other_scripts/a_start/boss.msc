@@ -39,10 +39,10 @@
 # no
 @var npc.add_output(50, "$2 I'm sorry, but I don't think I can do this. I don't have the experience to handle this.", 51)
 @var npc.add_output(51, "$1 Well, unfortunately, I don't have anyone else I can send out today. I'm going to need you to step up and take care of this.", 52)
-@var npc.add_output(52, "$1 The instruction manual is on the desk - you'll need to grab that before you head out. Just try your best.", 60)
+@var npc.add_output(52, "$1 The instruction manual is on the desk - you'll need to grab that before you head out. Just try your best, and good luck out there!", 60)
 
 # end
-@var npc.add_output(60, "$1 See you later!", 61)
+@var npc.add_output(60, "$2 See you later!", 61)
 @var npc.add_output(61, "&7[&cInfo&7] &ePick up the guidebook, then go outside to your motorbike and right-click on the Claude waiting for you.", -1)
 
 # start dialogue

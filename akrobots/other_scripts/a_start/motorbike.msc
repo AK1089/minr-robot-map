@@ -1,9 +1,21 @@
 # ENTITY | on the motorbike itself
-@cooldown 81
+@cooldown 121
 @using akrobots
 @fast
 
+@for Int i in list::range(0, 6)
+    @bypass /playsound minecraft:entity.wolf.growl master @a[distance=..3] ~ ~-0.75 ~ 2 0 1
+    @delay 20
+
+    @if player.getY() < 70.7387 || player.getY() > 70.7388
+        @bypass /stopsound @s master
+        @player &7[&cClaude&7] &eYou need to be on the motorbike to start the journey!
+        @return
+    @fi
+@done
+
 # give the player the documentation book and teleport them to the starting point
+@bypass /stopsound @s master
 @bypass /teleport {{player}} {{teleportCoords[0]}}
 @var giveBook(player)
 @bypass /give {{player}} writable_book 3
