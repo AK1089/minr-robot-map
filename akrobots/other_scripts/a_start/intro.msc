@@ -1,0 +1,7 @@
+# ENTITY | on the Claude by the motorbike
+
+@cooldown 81
+@using akrobots
+@console /func execute entity_ai::EntityAI(Entity("{{entity.getUniqueId()}}"), Player("{{player.getUniqueId()}}")).watch(4)
+
+@player &7[&cClaude&7] &eBeep beep! When you're ready to head out, just hop on the motorbike and we'll get going!

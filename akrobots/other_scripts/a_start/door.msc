@@ -1,0 +1,30 @@
+@fast
+
+# check if the door is open using the block at the door's location
+@define Boolean door_open = Block(466, 69, -8381, "Theta").getBlockType().toLowerCase() == "redstone_block"
+
+# check if the player is inside the door's activation region
+@if region.getID() == "claudeslidingdoortrigger"
+
+    # if the door is closed, open it
+    @if !door_open
+
+        # move the door to the right and play a sound
+        @bypass /execute as @e[tag=claudeslidingdoor,type=minecraft:block_display] at @s run data merge entity @s {start_interpolation:0,interpolation_duration:15,transformation:{translation:[2.5f,0.0f,0.0f]}}
+        @bypass /setblock 466 69 -8381 minecraft:redstone_block
+        @bypass /playsound minecraft:entity.breeze.slide master @s
+    @fi
+    @return
+@fi
+
+# if someone is still inside the door's activation region, don't close the door
+@if Region("claudeslidingdoortrigger", "Theta").getPlayersInside().length() >= 1
+    @return
+@fi
+
+# if the door is open, close it
+@if door_open
+    @bypass /execute as @e[tag=claudeslidingdoor,type=minecraft:block_display] at @s run data merge entity @s {start_interpolation:0,interpolation_duration:15,transformation:{translation:[0.0f,0.0f,0.0f]}}
+    @bypass /setblock 466 69 -8381 minecraft:air
+    @bypass /playsound minecraft:entity.breeze.slide master @s
+@fi

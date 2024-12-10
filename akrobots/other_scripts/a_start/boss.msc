@@ -1,24 +1,49 @@
 # ENTITY | right-click boss in office
-@cooldown 502
+@cooldown 400
 
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"underline":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": Ah, there you are! It's good to see you.","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 30
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": Okay, we're running a bit late for today's set of demos.","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 40
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": The good news is the latest round of development has gone great, and Claude has achieved close to full generality!","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 50
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": The guys down in engineering set the ","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}},{"text":"learning rate","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""},"italic":true,"hoverEvent":{"action":"show_text","value":[{"text":"In machine learning, this refers to\nthe amount by which the model's\nbehaviour changes with each iteration\nof gradient descent, which governs how\nwell/quickly the model learns.","color":"yellow"}]}},{"text":" well on the last training run, and we now have","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}},{"text":" SOTA ","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""},"italic":true,"hoverEvent":{"action":"show_text","value":[{"text":"state-of-the-art","color":"yellow"}]}},{"text":"for ","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}},{"text":"sensory accuracy","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""},"italic":true,"hoverEvent":{"action":"show_text","value":[{"text":"Precision and reliability of a robot's sensors, including the ability to navigate and recognize objects or situations.","color":"yellow"}]}},{"text":" in all environments.","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 70
-@bypass /tellraw {{player}} [{"text":"{{player}}","color":"yellow","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"You, an employee of the marketing department of ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": You know I work in marketing, right?","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 40
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": Right. Well, point is Claude is the best robot on the market right now, and I want you to capitalise on that today!","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 50
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": I've booked demos at the ","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}},{"text":"quarry","color":"white","hoverEvent":{"action":"show_text","value":""}},{"text":" and the ","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}},{"text":"farm","color":"white","hoverEvent":{"action":"show_text","value":""}},{"text":".","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 70
-@bypass /tellraw {{player}} [{"text":"{{player}}","color":"yellow","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"You, an employee of the marketing department of ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": Alright, on it boss!","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 30
-@bypass /tellraw {{player}} [{"text":"AK","color":"dark_green","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"The big boss at ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": That's what I like to hear! The engineering folks cooked up an instruction manual, which is over here on the desk - feel free to grab that. Good luck out on the sites today!","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 30
-@bypass /tellraw {{player}} [{"text":"{{player}}","color":"yellow","bold":true,"hoverEvent":{"action":"show_text","value":[{"text":"You, an employee of the marketing department of ","color":"yellow"},{"text":"AK Robotics Incorporated","color":"light_purple","italic":true}]}},{"text":": See you later!","color":"gray","bold":false,"underline":false,"hoverEvent":{"action":"show_text","value":""}}]
-@delay 20
-@player &7[&cInfo&7] &ePick up the guidebook, then go outside to your motorbike and right-click on the Claude waiting for you.
+@define dialogue::Tree npc = dialogue::Tree(player)
+@var npc.add_prefix("&6AK&7:")
+@var npc.add_prefix("&e{{player}}&7:")
+
+# introductory dialogue
+@var npc.add_output(0, "$1 Ah, there you are! It's good to see you.", 1)
+@var npc.add_output(1, "$1 I have some good news and some bad news. What do you want first?", 2)
+
+# choose good or bad news
+@var npc.add_choice(2, 1, "Good news", "enabled", 10)
+@var npc.add_choice(2, 2, "Bad news", "enabled", 20)
+
+# good news
+@var npc.add_output(10, "$2 Let's hear the good news.", 11)
+@var npc.add_output(11, "$1 Well, the latest round of development has gone great! Claude is ready for deployment in the field.", 12)
+@var npc.add_output(12, "$1 We're looking to field demos down at the quarry later on - that's what I need you for.", 13)
+@var npc.add_output(13, "$2 Sounds good - what's the bad news?", 14)
+@var npc.add_output(14, "$1 Well, the engineers were running a little late and haven't had time to prepare today's code.", 15)
+@var npc.add_output(15, "$1 You're going to have to wing it a bit, but I'm sure you'll do fine. Can I count on you?", 30)
+
+# bad news
+@var npc.add_output(20, "$1 Okay, we're running a bit late for today's set of demos, and all the documents have been mixed up.", 21)
+@var npc.add_output(21, "$1 The engineering team is still working on the code for today's demo, so you're going to have to wing it a bit.", 22)
+@var npc.add_output(22, "$1 The instruction manual is on the desk - you'll need to grab that before you head out.", 23)
+@var npc.add_output(23, "$1 The good news is that the team is confident that Claude is ready for deployment. Can I count on you?", 30)
+
+# confirmation
+@var npc.add_choice(30, 4, "Yes", "enabled", 40)
+@var npc.add_choice(30, 5, "No", "enabled", 50)
+
+# yes
+@var npc.add_output(40, "$2 Yes, of course. I'll do my best to make sure everything goes smoothly.", 41)
+@var npc.add_output(41, "$1 That's what I like to hear! The engineering folks cooked up an instruction manual, which is over here on the desk.", 42)
+@var npc.add_output(42, "$1 You'll need to grab that before heading out. Good luck out on the sites today!", 60)
+
+# no
+@var npc.add_output(50, "$2 I'm sorry, but I don't think I can do this. I don't have the experience to handle this.", 51)
+@var npc.add_output(51, "$1 Well, unfortunately, I don't have anyone else I can send out today. I'm going to need you to step up and take care of this.", 52)
+@var npc.add_output(52, "$1 The instruction manual is on the desk - you'll need to grab that before you head out. Just try your best.", 60)
+
+# end
+@var npc.add_output(60, "$1 See you later!", 61)
+@var npc.add_output(61, "&7[&cInfo&7] &ePick up the guidebook, then go outside to your motorbike and right-click on the Claude waiting for you.", -1)
+
+# start dialogue
+@var npc.display(0)

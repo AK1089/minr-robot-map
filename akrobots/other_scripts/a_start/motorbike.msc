@@ -1,0 +1,13 @@
+# ENTITY | on the motorbike itself
+@cooldown 81
+@using akrobots
+@fast
+
+# give the player the documentation book and teleport them to the starting point
+@bypass /teleport {{player}} {{teleportCoords[0]}}
+@var giveBook(player)
+@bypass /give {{player}} writable_book 3
+
+# reset the levelComplete array
+@var levelComplete = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+@player &7[&cInfo&7] &eNow entering the &dQuarry&e. Speak to the &dForeman &eto receive your tasks!
