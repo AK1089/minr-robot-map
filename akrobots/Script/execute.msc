@@ -200,6 +200,13 @@
         @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Could not parse command {{command}}
         @return false
     @fi
+
+    # check again for interrupts / if the robot is still running
+    @if !currentlyRunning[this.robot.id] || !player.isOnline() 
+        @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Execution manually terminated.
+        @var this.robot.reset()
+        @return false
+    @fi
 @done
 
 # if all commands executed successfully, return true

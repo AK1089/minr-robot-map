@@ -3,10 +3,19 @@
 @using akrobots
 
 # editing the armour stand to move it around shouldn't do anything
-@if String["flint", "barrier"].contains(player.getItemInMainHand().getItemType().toLowerCase())
+@if player.getItemInMainHand().getItemType().toLowerCase() == "flint"
     @player &7[&cInfo&7] &eManually overriding for edit mode.
     @var currentlyRunning[index] = false
     @var levelComplete[index] = false
+    @return
+@fi
+
+# using the emergency stop item
+@if player.getItemInMainHand().getItemType().toLowerCase() == "flint"
+    @player &7[&cInfo&7] &eUsing the &dEMERGENCY STOP&e...
+    @var currentlyRunning[index] = false
+    @delay 20
+    @player &7[&cInfo&7] &eTerminated the current script and reset Claude.
     @return
 @fi
 
@@ -18,7 +27,7 @@
 
 # no multiple concurrent runs!
 @if currentlyRunning[index]
-    @player &7[&cInfo&7] &eClaude is currently executing a script! Please wait for him to finish.
+    @player &7[&cInfo&7] &eClaude is currently executing a script! Please wait for him to finish, or use the emergency stop.
     @return
 @fi
 
