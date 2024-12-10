@@ -19,7 +19,11 @@
 @bypass /teleport {{player}} {{teleportCoords[0]}}
 @var giveBook(player)
 @bypass /give {{player}} writable_book 3
+@bypass /item replace entity @s container.8 with minecraft:barrier[minecraft:custom_name='{"text":"Emergency Stop","italic":false}',minecraft:lore=['{"text":"Right click to forcibly end a script.","italic":false,"color":"gray"}']] 1
 
 # reset the levelComplete array
 @var levelComplete = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 @player &7[&cInfo&7] &eNow entering the &dQuarry&e. Speak to the &dForeman &eto receive your tasks!
+
+# reset the foreman's offers
+@bypass /data modify entity d9f7a863-f230-410b-89fe-c3b7ee1c3355 Offers set value {Recipes:[]}
