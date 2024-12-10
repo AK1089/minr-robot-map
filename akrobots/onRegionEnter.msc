@@ -2,6 +2,7 @@
 
 @using akrobots
 @if !levelComplete[index - 1]
-    @player &7[&cInfo&7] &eYou have not yet completed the previous level!
+    @player &7[&cInfo&7] &eYou have not unlocked this level yet!
+    @bypass /playsound minecraft:block.note_block.bass master @s ~ ~ ~ 2 0.3 1
     @bypass /teleport {{player}} {{teleportCoords[index]}}
 @fi

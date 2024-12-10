@@ -3,9 +3,6 @@
 @using akrobots
 @fast
 
-# set the first "level complete" flag to indicate that the player has spoken to the foreman
-@var levelComplete[0] = true
-
 # reset the foreman's offers
 @bypass /data modify entity d9f7a863-f230-410b-89fe-c3b7ee1c3355 Offers set value {Recipes:[]}
 
@@ -23,6 +20,9 @@
 # start dialogue
 @for Int i in list::range(0, levelComplete.length())
     @if !levelComplete[i]
+
+        # set the first "level complete" flag to indicate that the player has spoken to the foreman/s 
+        @var levelComplete[0] = true
         @var npc.display(10 * i)
         @return
     @fi

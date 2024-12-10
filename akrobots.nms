@@ -55,6 +55,6 @@
     Boolean[] currentlyRunning = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 
     # String[] robotUUIDs = String["d813eb31-e252-4acc-b97c-10c34de6a7e0"]
-    String[] teleportCoords = String["-12645.5 117.0 -12534.0 180 -30", "-12652.5 115.00 -12526.5", "-12642.5 115.00 -12525.5 -90 0"]
+    String[] teleportCoords = String["-12652.0 115.00 -12522.0 210 0", "-12642.5 115.00 -12525.5 -90 0", "-12632.0 115.00 -12523.5 -90 0"]
 
 @endnamespace

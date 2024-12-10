@@ -6,3 +6,4 @@
 @bypass /minr restore claude_level_{{this.id}} Theta
 @bypass /data modify entity @e[tag=claude_level_{{this.id}}_check,limit=1] Items set value []
 @bypass /data modify entity {{this.entity.getUniqueId()}} HandItems[0].id set value "diamond_pickaxe"
+@var this.playsound("block.beacon.deactivate")

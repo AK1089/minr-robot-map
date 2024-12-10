@@ -14,7 +14,13 @@
 @if player.getItemInMainHand().getItemType().toLowerCase() == "flint"
     @player &7[&cInfo&7] &eUsing the &dEMERGENCY STOP&e...
     @var currentlyRunning[index] = false
-    @delay 20
+    @delay 10
+    @define String startPosition = String["-12636.50 115.00 -12526.50 -90 0"][0]
+    @bypass /execute as {{entity.getUniqueId()}} at @s run teleport @s {{startPosition}}
+    @bypass /minr restore claude_level_{{index}} Theta
+    @bypass /data modify entity @e[tag=claude_level_{{index}}_check,limit=1] Items set value []
+    @bypass /data modify entity {{entity.getUniqueId()}} HandItems[0].id set value "diamond_pickaxe"
+    @delay 10
     @player &7[&cInfo&7] &eTerminated the current script and reset Claude.
     @return
 @fi
@@ -63,7 +69,7 @@
 
 # check if the level is complete
 @if levelComplete[index]
-    @player &7[&cInfo&7] &aLevel {{index + 1}} complete - well done!
+    @player &7[&cInfo&7] &aLevel {{index}} complete - well done!
     @delay 40
     @player &7[&cInfo&7] &eGo talk to the &dForeman &eagain for the next set of instructions.
 @else
