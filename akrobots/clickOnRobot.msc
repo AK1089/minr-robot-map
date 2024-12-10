@@ -69,6 +69,7 @@
 
 # check if the level is complete
 @if levelComplete[index]
+    @bypass /playsound minecraft:entity.player.levelup master @s
     @player &7[&cInfo&7] &aLevel {{index}} complete - well done!
     @delay 40
     @player &7[&cInfo&7] &eGo talk to the &dForeman &eagain for the next set of instructions.
