@@ -1,8 +1,7 @@
 # METHOD | Robot.placeBlock()
 @fast
 @using akrobots
-@define Player player = Player("AK1089")
-@player &7 ------ &eExecuting action: &7PLACE_BLOCK
+# @player &7 ------ &eExecuting action: &7PLACE_BLOCK
 
 # direction the armor stand is facing
 @define Int facing_direction = (util::executeAndQueryResult("/data get entity {{this.entity.getUniqueId()}} Rotation[0]") + 720) % 360

@@ -1,7 +1,6 @@
 # METHOD | Robot.pickUpItems()
 @fast
 @using akrobots
-@define Player player = Player("AK1089")
 
 @define Int x = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at @s run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[0]")
 @define Int y = util::executeAndQueryResult("/execute as {{this.entity.getUniqueId()}} at @s run data get entity @e[type=item,limit=1,sort=nearest,distance=..2] Pos[1]")
@@ -21,10 +20,10 @@
 @fi
 
 @define String blockType = (item + "").replace(" ", "_").toLowerCase()
-@player {{blockType}}
+# @player {{blockType}}
 
 @bypass /minecraft:kill {{item.getUniqueId()}}
 @var this.playsound("entity.item.pickup")
 
 @var this.inventory.append(blockType)
-@player {{this.inventory}}
+# @player {{this.inventory}}

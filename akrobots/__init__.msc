@@ -19,10 +19,10 @@
 # the foreman -> b/foreman.msc
 @bypass /s i e d9f7a863-f230-410b-89fe-c3b7ee1c3355 <#other_scripts/b_quarry/foreman.msc>
 
-@bypass /s r w -12657 115 -12527
-# @bypass /s c w -12657 115 -12527 @var akrobots::onRegionEnter(player, 1)
 @bypass /s r w -12640 114 -12526
-# @bypass /s c w -12640 114 -12526 @var akrobots::onRegionEnter(player, 2)
+@bypass /s c w -12640 114 -12526 @var akrobots::onRegionEnter(player, 1)
+@bypass /s r w -12630 114 -12524
+@bypass /s c w -12630 114 -12524 @var akrobots::onRegionEnter(player, 2)
 
 # @bypass /tag ea3ce793-e2f2-4194-b4c5-8f7ef5638e7e add claude_level_0_check
 # @bypass /tag 86abc8ce-f180-4f00-9847-272cfbbb6d1a add claude_level_1_check

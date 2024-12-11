@@ -47,7 +47,7 @@
 @fi
 
 # player has now submitted a book
-@player &bCompiling robot script...
+# @player &bCompiling robot script...
 
 # parse the script from the writable book
 @define Script script = parseScript(player, book)

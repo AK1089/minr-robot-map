@@ -1,7 +1,7 @@
 # METHOD | Robot.switchItem(String itemName)
 @fast
-@define Player player = Player("AK1089")
-@player &7 ------ &eExecuting action: &7SWITCH_ITEM (steps={{itemName}})
+
+# @player &7 ------ &eExecuting action: &7SWITCH_ITEM (steps={{itemName}})
 
 @if !this.inventory.contains(itemName)
     @return

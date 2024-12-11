@@ -21,10 +21,10 @@
                 @var script.routines.append(Routine(currentRoutineName, currentRoutineLines))
 
                 # output that the function is compiled and each line in it
-                @player &7 -- &dCompiling function {{currentRoutineName}}.robot
-                @for String line_ in currentRoutineLines
-                    @player &7 ---- &eAdding line &f{{line_}}
-                @done
+                # @player &7 -- &dCompiling function {{currentRoutineName}}.robot
+                # @for String line_ in currentRoutineLines
+                #     @player &7 ---- &eAdding line &f{{line_}}
+                # @done
 
                 # reset the list of lines
                 @var currentRoutineLines = String[]
@@ -47,14 +47,14 @@
 # add the last routine to the list if it's non-empty
 @if currentRoutineLines.length() > 0
     @var script.routines.append(Routine(currentRoutineName, currentRoutineLines))
-    @player &7 -- &dCompiling function {{currentRoutineName}}.robot
-    @for String line_ in currentRoutineLines
-        @player &7 ---- &eAdding line &f{{line_}}
-    @done
+    # @player &7 -- &dCompiling function {{currentRoutineName}}.robot
+    # @for String line_ in currentRoutineLines
+    #     @player &7 ---- &eAdding line &f{{line_}}
+    # @done
 @fi
 
 # final output
-@player &aSuccessfully compiled scripts; now executing.
-@player
+# @player &aSuccessfully compiled scripts; now executing.
+# @player
 
 @return script

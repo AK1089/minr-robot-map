@@ -11,7 +11,7 @@
     @return false
 @fi
 
-@player &7 -- &eExecuting file &d{{routineName}}.robot
+# @player &7 -- &eExecuting file &d{{routineName}}.robot
 
 # variables we need for the loop
 @define String line
@@ -31,7 +31,7 @@
     @var parts.append("")
     @var command = parts[0].toLowerCase()
 
-    @player &7 ---- &eExecuting line &f{{line}} &7(command = &f{{command}}&7)
+    # @player &7 ---- &eExecuting line &f{{line}} &7(command = &f{{command}}&7)
     
     # interrupt
     # || ! (Region("claude_rgcheck_1").containsPlayer(player) || Region("claude_rgcheck_2").containsPlayer(player) || Region("claude_rgcheck_3").containsPlayer(player) || Region("claude_rgcheck_4").containsPlayer(player))
@@ -204,6 +204,13 @@
     # check again for interrupts / if the robot is still running
     @if !currentlyRunning[this.robot.id] || !player.isOnline() 
         @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Execution manually terminated.
+        @var this.robot.reset()
+        @return false
+    @fi
+
+    # robot must stay within the region
+    @if !Region("claude_level_{{this.robot.id}}", "Theta").containsLocation(this.robot.entity.getLocation().asBlockLocation())
+        @player &cError &f(Function &d{{routine.name}}.robot&f, Line {{i+1}})&7: Robot may not leave designated bounds!
         @var this.robot.reset()
         @return false
     @fi
