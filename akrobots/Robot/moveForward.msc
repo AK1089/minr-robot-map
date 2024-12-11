@@ -37,7 +37,7 @@
     @fi
     @var this.pickUpItems()
 
-    @if !currentlyRunning[this.id] || !player.isOnline() 
+    @if !currentlyRunning[this.id]
         @return
     @fi
 
