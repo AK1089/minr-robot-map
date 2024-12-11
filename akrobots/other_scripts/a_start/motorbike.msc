@@ -17,9 +17,15 @@
 # give the player the documentation book and teleport them to the starting point
 @bypass /stopsound @s master
 @bypass /teleport {{player}} {{teleportCoords[0]}}
+@bypass /clear @s
 @var giveBook(player)
-@bypass /give {{player}} writable_book 3
-@bypass /item replace entity @s container.8 with minecraft:barrier[minecraft:custom_name='{"text":"Emergency Stop","italic":false}',minecraft:lore=['{"text":"Right click to forcibly end a script.","italic":false,"color":"gray"}']] 1
+
+# /give @s writable_book[custom_name='{"bold":false,"color":"dark_green","italic":false,"text":"Portable Code Module","underlined":false}',lore=['{"bold":false,"color":"gray","italic":false,"text":"Do not sign!","underlined":false}'],enchantments={levels:{"minecraft:vanishing_curse":1},show_in_tooltip:false},enchantment_glint_override=false,writable_book_content={pages:["# main.robot"]}] 1
+@bypass /item replace entity @s container.1 from block -12650 125 -12513 container.0
+@bypass /item replace entity @s container.2 from block -12650 125 -12513 container.0
+@bypass /item replace entity @s container.3 from block -12650 125 -12513 container.0
+@bypass /item replace entity @s container.4 from block -12650 125 -12513 container.0
+@bypass /item replace entity @s container.8 with minecraft:barrier[minecraft:custom_name='{"text":"Emergency Stop","italic":false,"color":"red"}',minecraft:lore=['{"text":"Right click to forcibly end a script.","italic":false,"color":"gray"}']] 1
 
 # reset the levelComplete array
 @var levelComplete = Boolean[false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
