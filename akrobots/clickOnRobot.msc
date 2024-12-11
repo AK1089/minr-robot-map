@@ -4,14 +4,14 @@
 
 # editing the armour stand to move it around shouldn't do anything
 @if player.getItemInMainHand().getItemType().toLowerCase() == "flint"
-    @player &7[&cInfo&7] &eManually overriding for edit mode.
+    @player &7[&cInfo&7] &eManually ovterriding for edit mode.
     @var currentlyRunning[index] = false
     @var levelComplete[index] = false
     @return
 @fi
 
 # using the emergency stop item
-@if player.getItemInMainHand().getItemType().toLowerCase() == "flint"
+@if player.getItemInMainHand().getItemType().toLowerCase() == "barrier"
     @player &7[&cInfo&7] &eUsing the &dEMERGENCY STOP&e...
     @var currentlyRunning[index] = false
     @delay 10

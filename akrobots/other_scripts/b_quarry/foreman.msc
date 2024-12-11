@@ -14,8 +14,21 @@
 @var npc.add_output(0, "$1 Hey there! Thanks for dropping on by.", 1)
 @var npc.add_output(1, "$1 Your boss has told me a lot about what this little guy is capable of, and I'm excited to see it in action.", 2)
 @var npc.add_output(2, "$1 I've set up a few stations around the site. Can you go around and get Claude to complete each task?", 3)
-@var npc.add_output(3, "$1 Just come back and say hello when you're done with each one.", 4)
-@var npc.add_output(4, "$1 You'll want to go through the entrance behind you and to the right. Just get the robot to walk from the start to the end as marked.", -1)
+@var npc.add_output(3, "$2 Sure! I'll go and see what I can do.", 4)
+@var npc.add_output(4, "$1 Fantastic! Just come back and say hello when you're finished with each one.", 5)
+@var npc.add_output(5, "$1 You'll want to go through the entrance behind you and to the right. Just get the robot to walk from the start to the end as marked.", -1)
+
+# reminder of level 1 instructions
+@var npc.add_output(10, "$1 Hey again. You made any progress with getting Claude to walk around?", 11)
+@var npc.add_output(11, "$2 Not yet. What do I have to do exactly?", 12)
+@var npc.add_output(12, "$1 See the little entrance on the east wall? Go through there to start.", 13)
+@var npc.add_output(13, "$1 Go make the robot walk from the emerald he's standing on to the gold just in front.", -1)
+
+# level 2 instructions
+@var npc.add_output(20, "$2 I got Claude to walk along your marked route. What's next?", 21)
+@var npc.add_output(21, "$1 Oh, that's fantastic! ", 22)
+@var npc.add_output(22, "$1 See the little entrance on the east wall? Go through there to start.", 23)
+@var npc.add_output(23, "$1 Go make the robot walk from the emerald he's standing on to the gold just in front.", -1)
 
 # start dialogue
 @for Int i in list::range(0, levelComplete.length())
