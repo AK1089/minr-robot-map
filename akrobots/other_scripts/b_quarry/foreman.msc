@@ -22,19 +22,23 @@
 @var npc.add_output(10, "$1 Hey again. You made any progress with getting Claude to walk around?", 11)
 @var npc.add_output(11, "$2 Not yet. What do I have to do exactly?", 12)
 @var npc.add_output(12, "$1 See the little entrance on the east wall? Go through there to start.", 13)
-@var npc.add_output(13, "$1 Go make the robot walk from the emerald he's standing on to the gold just in front.", -1)
+@var npc.add_output(13, "$1 Go make the robot walk from the emerald he's standing on to the gold just in front.", 14)
+@var npc.add_output(14, "$2 Sounds good! I'll let you know when I've finished that.", -1)
 
 # level 2 instructions
 @var npc.add_output(20, "$2 I got Claude to walk along your marked route. What's next?", 21)
-@var npc.add_output(21, "$1 Oh, that's fantastic! ", 22)
-@var npc.add_output(22, "$1 See the little entrance on the east wall? Go through there to start.", 23)
-@var npc.add_output(23, "$1 Go make the robot walk from the emerald he's standing on to the gold just in front.", -1)
+@var npc.add_output(21, "$1 Oh, that's fantastic!", 22)
+@var npc.add_output(22, "$1 Just through from there is the mine entrance, down a ladder. I need to be sure that Claude can drop down safely.", 23)
+@var npc.add_output(23, "$1 It's cordoned off so you don't get hurt, and there's a door past there before the ladder.", 24)
+@var npc.add_output(24, "$1 You need to stand on the activation plate for &lthree seconds &7to open the door.", 25)
+@var npc.add_output(25, "$1 Come back to me when you're done.", 26)
+@var npc.add_output(26, "$2 Got it. I'll let you know when I've done that.", -1)
 
 # start dialogue
 @for Int i in list::range(0, levelComplete.length())
     @if !levelComplete[i]
 
-        # set the first "level complete" flag to indicate that the player has spoken to the foreman/s 
+        # set the first "level complete" flag to indicate that the player has spoken to the foreman
         @var levelComplete[0] = true
         @var npc.display(10 * i)
         @return
